@@ -14,6 +14,8 @@
             --neu-light: #ffffff;
             --neu-shadow: #d1c4c9;
             --text-main: #880e4f;
+            --spotify-green: #1db954;
+            --spotify-black: #191414;
         }
 
         * {
@@ -89,14 +91,14 @@
         
         section.active { opacity: 1; }
 
-        /* --- GLASS CARD (Fixed Padding for Mobile) --- */
+        /* --- GLASS CARD --- */
         .glass-card {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 25px; /* Reduced from 40px for mobile */
+            padding: 25px;
             text-align: center;
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
             width: 100%;
@@ -114,7 +116,7 @@
             background: var(--bg-color);
             margin-bottom: 15px;
             touch-action: none;
-            max-width: 100%; /* Prevent overflow */
+            max-width: 100%;
         }
         
         .score-board {
@@ -123,65 +125,154 @@
             color: var(--primary);
         }
 
-        /* --- MUSIC PLAYER --- */
-        .music-player {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* --- NEW MUSIC PLAYER STYLE (REFERENCE MATCH) --- */
+        .music-header {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            color: #555;
+            font-weight: 600;
+            text-align: left;
+            padding-left: 5px;
         }
 
-        .album-art {
-            width: 180px;
-            height: 180px;
+        .music-card-inner {
+            background: #fffafa; /* Light card background like image */
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 15px;
+        }
+
+        .album-art-container {
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            aspect-ratio: 1/1;
+        }
+
+        .album-art-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .song-info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .song-text h2 {
+            font-family: 'Georgia', serif; /* Serif font for title */
+            font-size: 1.5rem;
+            margin: 0;
+            color: #333;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .song-text h3 {
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 0.9rem;
+            margin: 5px 0 0 0;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .like-icon {
+            color: var(--spotify-green);
+            font-size: 1.4rem;
+        }
+
+        /* Progress Bar */
+        .progress-area {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            position: relative;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #444;
+            border-radius: 10px;
+            width: 0%;
+        }
+
+        .time-stamps {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: #888;
+            font-weight: 500;
+        }
+
+        /* Controls */
+        .player-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5px;
+        }
+
+        .ctrl-icon {
+            background: none;
+            border: none;
+            color: #333;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .ctrl-icon:active { transform: scale(0.9); }
+
+        .play-pause-btn {
+            width: 55px;
+            height: 55px;
+            background: #333;
             border-radius: 50%;
-            background: linear-gradient(145deg, #ffffff, #e6e6e6);
-            box-shadow: 15px 15px 40px #d9d9d9, -15px -15px 40px #ffffff;
-            margin-bottom: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.5rem;
-            color: var(--primary);
-            animation: spin 10s linear infinite;
-            animation-play-state: paused;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         }
 
-        .album-art.playing { animation-play-state: running; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        .controls {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .ctrl-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: none;
-            background: var(--bg-color);
-            box-shadow: 5px 5px 10px var(--neu-shadow), -5px -5px 10px var(--neu-light);
-            color: var(--primary);
-            font-size: 1rem;
+        .level-text {
+            color: var(--spotify-green);
+            font-weight: 700;
+            font-size: 0.85rem;
             cursor: pointer;
+            margin-top: 10px;
+            transition: opacity 0.3s;
         }
-        .ctrl-btn:active { box-shadow: inset 3px 3px 6px var(--neu-shadow), inset -3px -3px 6px var(--neu-light); }
-        .play-btn { width: 60px; height: 60px; font-size: 1.3rem; }
-
-        /* --- GAME 2: MEMORY (FIXED ALIGNMENT) --- */
+        
+        /* --- GAME 2: MEMORY --- */
         .memory-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 columns that split space evenly */
-            gap: 8px; /* Small gap between cards */
-            width: 100%; /* Force grid to stay inside parent */
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            width: 100%;
             margin-bottom: 20px;
         }
 
         .card {
-            width: 100%; /* Fill the grid cell */
-            aspect-ratio: 1 / 1; /* Keep it perfectly square */
+            width: 100%;
+            aspect-ratio: 1 / 1;
             position: relative;
             transform-style: preserve-3d;
             transition: transform 0.5s;
@@ -266,24 +357,46 @@
     </section>
 
     <section id="sec-music" class="hidden">
-        <div class="glass-card music-player">
-            <div class="album-art" id="album-art">
-                <i class="fas fa-music"></i>
+        <div class="glass-card">
+            <div class="music-header">PLAYING FROM YOUR LIBRARY</div>
+            
+            <div class="music-card-inner">
+                <div class="album-art-container">
+                    <img src="https://c.saavncdn.com/264/Dooron-Dooron-Unplugged-Hindi-2021-20210517112003-500x500.jpg" id="album-art-display" class="album-art-img" alt="Album Art">
+                </div>
+
+                <div class="song-info-row">
+                    <div class="song-text">
+                        <h2 id="song-title">Dooron Dooron</h2>
+                        <h3 id="artist-name">Paresh Pahuja</h3>
+                    </div>
+                    <i class="fas fa-heart like-icon"></i>
+                </div>
+
+                <div class="progress-area">
+                    <div class="progress-bar" onclick="seekAudio(event)">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="time-stamps">
+                        <span id="current-time">0:00</span>
+                        <span id="duration">3:45</span>
+                    </div>
+                </div>
+
+                <div class="player-controls">
+                    <button class="ctrl-icon" onclick="dummyAction()"><i class="fas fa-random"></i></button>
+                    <button class="ctrl-icon" onclick="prevSong()"><i class="fas fa-step-backward"></i></button>
+                    <button class="play-pause-btn" onclick="togglePlay()">
+                        <i id="play-icon" class="fas fa-play"></i>
+                    </button>
+                    <button class="ctrl-icon" onclick="nextSong()"><i class="fas fa-step-forward"></i></button>
+                    <button class="ctrl-icon" onclick="dummyAction()"><i class="fas fa-redo"></i></button>
+                </div>
             </div>
-            <div class="song-info">
-                <h2 id="song-title">Song Title</h2>
-                <h3 id="artist-name">Artist</h3>
-            </div>
+
+            <p class="level-text" onclick="nextSection('sec-game2')">Level Unlocked! TAP HERE to continue.</p>
             
             <audio id="audio-player"></audio>
-
-            <div class="controls">
-                <button class="ctrl-btn" onclick="prevSong()"><i class="fas fa-backward"></i></button>
-                <button class="ctrl-btn play-btn" onclick="togglePlay()"><i id="play-icon" class="fas fa-play"></i></button>
-                <button class="ctrl-btn" onclick="nextSong()"><i class="fas fa-forward"></i></button>
-            </div>
-            
-            <button class="btn" style="margin-top: 20px;" onclick="nextSection('sec-game2')">Next Surprise</button>
         </div>
     </section>
 
@@ -315,15 +428,15 @@
             <div class="final-letter">
                 <p>Sometimes words aren't enough, so I used code.</p>
                 <p>Just like this website, my love for you has layers. Some are playful, some are musical, and some are just pure magic.</p>
-                <p>Happy Valentine's Day.</p>
+                <p>🤭🤭🤭</p>
                 <p>Always yours,</p>
-                <p><b>Your love...</b></p>
+                <p><b>your love</b></p>
             </div>
         </div>
     </section>
 
     <script>
-        // --- NAVIGATION (FIXED) ---
+        // --- NAVIGATION ---
         function nextSection(id) {
             const current = document.querySelector('section.active');
             if (current) {
@@ -356,10 +469,9 @@
         function resizeCanvas() {
             const container = document.querySelector('.glass-card');
             if(container) {
-                // Resize canvas to fit inside the card with padding
                 const newWidth = container.clientWidth - 50; 
                 canvas.width = newWidth;
-                catcher.x = newWidth / 2 - 25; // Re-center catcher
+                catcher.x = newWidth / 2 - 25; 
             }
         }
 
@@ -389,18 +501,15 @@
             if (catcher.x < 0) catcher.x = 0;
             if (catcher.x + catcher.width > canvas.width) catcher.x = canvas.width - catcher.width;
 
-            // Draw Catcher
             ctx.fillStyle = '#ec407a';
             ctx.beginPath();
             ctx.roundRect(catcher.x, catcher.y, catcher.width, catcher.height, 5);
             ctx.fill();
 
-            // Spawn Hearts
             if (Math.random() < 0.04) {
                 hearts.push({ x: Math.random() * (canvas.width - 20), y: 0 });
             }
 
-            // Draw Hearts
             ctx.fillStyle = '#e91e63';
             ctx.font = '24px Arial';
             hearts.forEach((h, index) => {
@@ -420,25 +529,47 @@
         }
 
         // --- MUSIC PLAYER ---
-        const songs = [
-            { title: "Dooron Dooron", artist: "Paresh Pahuja", src: "Dooron_Dooron_-__lyrics__Paresh_Pahuja___feat._Harleen_Sethi___Shiv_Tandan,Meghdeep_Bose,Vaibhav_Raj(128k).mp3" }, 
-            { title: "Perfect", artist: "Ed Sheeran", src: "Ed_Sheeran_-_Perfect(256k).mp3" },
-            { title: "Khat", artist: "Karan Ahuja", src: "Khat_-_Navjot_Ahuja___Lyrics(256k).mp3" },
-            { title: "Sarara Sarara", artist: "Kehar Limbu", src: "Kehar_Singh_Limbu_-_Sarara_Sarara__Lyrics____Fulai_Fulko_Bagaichaa_Ma_Meri_Maya(256k).mp3" },
-            { title: "Upohar", artist: "Bishrut Saikia", src: "Bishrut_Saikia_-_Upohar__Official_Music_Video_(128k).mp3" },
-            { title: "Pehli Nazar", artist: "Atif Aslam", src: "Pehli_Nazar_Mein_Kaise_Jaado_Kar_Diya___Atif_Aslam_Hits___Race_I_Akshaye,_Bipasha___Saif_Ali(256k).mp3" }
+                        const songs = [
+            { 
+                title: "Dooron Dooron", 
+                artist: "Paresh Pahuja", 
+                src: "Dooron_Dooron_-__lyrics__Paresh_Pahuja___feat._Harleen_Sethi___Shiv_Tandan,Meghdeep_Bose,Vaibhav_Raj(128k).mp3",
+                img: "dooron.jpg" 
+            }, 
+            { 
+                title: "Perfect", 
+                artist: "Ed Sheeran", 
+                src: "Ed_Sheeran_-_Perfect(256k).mp3",
+                img: "https://i.scdn.co/image/ab67616d0000b273ba5db46f4b838ef6027e6f96" 
+            },
+            { 
+                title: "Khat", 
+                artist: "Karan Ahuja", 
+                src: "Khat_-_Navjot_Ahuja___Lyrics(256k).mp3",
+                img: "khat.jpg" 
+            }
         ];
+
+
 
         let currentSongIndex = 0;
         const audio = document.getElementById('audio-player');
         const playIcon = document.getElementById('play-icon');
-        const albumArt = document.getElementById('album-art');
+        const albumArt = document.getElementById('album-art-display');
+        const progressFill = document.getElementById('progress-fill');
+        const currentTimeEl = document.getElementById('current-time');
+        const durationEl = document.getElementById('duration');
 
         function loadSong(index) {
             const song = songs[index];
             document.getElementById('song-title').innerText = song.title;
             document.getElementById('artist-name').innerText = song.artist;
+            if(song.img) albumArt.src = song.img;
             audio.src = song.src; 
+            
+            // Reset progress
+            progressFill.style.width = '0%';
+            currentTimeEl.innerText = "0:00";
         }
 
         function togglePlay() {
@@ -446,12 +577,10 @@
                 audio.play().catch(e => alert("Tap screen first!")); 
                 playIcon.classList.remove('fa-play');
                 playIcon.classList.add('fa-pause');
-                albumArt.classList.add('playing');
             } else {
                 audio.pause();
                 playIcon.classList.remove('fa-pause');
                 playIcon.classList.add('fa-play');
-                albumArt.classList.remove('playing');
             }
         }
 
@@ -461,7 +590,6 @@
             audio.play();
             playIcon.classList.remove('fa-play');
             playIcon.classList.add('fa-pause');
-            albumArt.classList.add('playing');
         }
 
         function prevSong() {
@@ -470,12 +598,42 @@
             audio.play();
             playIcon.classList.remove('fa-play');
             playIcon.classList.add('fa-pause');
-            albumArt.classList.add('playing');
+        }
+
+        // Update Progress Bar
+        audio.addEventListener('timeupdate', () => {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = progress + '%';
+            
+            // Format Time
+            let currentMins = Math.floor(audio.currentTime / 60);
+            let currentSecs = Math.floor(audio.currentTime % 60);
+            if (currentSecs < 10) currentSecs = '0' + currentSecs;
+            currentTimeEl.innerText = `${currentMins}:${currentSecs}`;
+            
+            if(!isNaN(audio.duration)) {
+                let durMins = Math.floor(audio.duration / 60);
+                let durSecs = Math.floor(audio.duration % 60);
+                if (durSecs < 10) durSecs = '0' + durSecs;
+                durationEl.innerText = `${durMins}:${durSecs}`;
+            }
+        });
+
+        // Click on Progress Bar to Seek
+        function seekAudio(e) {
+            const width = e.target.closest('.progress-bar').clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            audio.currentTime = (clickX / width) * duration;
+        }
+        
+        function dummyAction() {
+            // Placeholder for shuffle/repeat buttons
         }
 
         loadSong(0);
 
-        // --- GAME 2: MEMORY (FIXED) ---
+        // --- GAME 2: MEMORY ---
         const icons = ['❤', '🌹', '💍', '💌', '❤', '🌹', '💍', '💌'];
         let openedCards = [];
         let matchedPairs = 0;
